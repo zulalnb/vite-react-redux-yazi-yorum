@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Button, Modal } from "semantic-ui-react";
 import { deletePost } from "../actions";
 
@@ -9,11 +9,11 @@ const DeleteModal = ({ post }) => {
   const error = useSelector((state) => state.deletePostError);
   const show = () => setOpen(true);
   const close = () => setOpen(false);
-  const { push } = useHistory();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleDelete = (id) => {
-    dispatch(deletePost(id, close, push));
+    dispatch(deletePost(id, close, navigate));
   };
 
   return (

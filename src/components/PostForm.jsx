@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addPost, updatePost } from "../actions";
 
 const PostForm = (props) => {
   const [post, setPost] = useState({
     title: "",
-    content: ""
+    content: "",
   });
   const [error, setError] = useState("");
 
   const { id } = useParams();
-  const history = useHistory();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const onInputChange = (event) =>
@@ -22,9 +22,9 @@ const PostForm = (props) => {
     setError("");
 
     if (props.post) {
-      dispatch(updatePost(id, post, history.push));
+      dispatch(updatePost(id, post, navigate));
     } else {
-      dispatch(addPost(post, history.push));
+      dispatch(addPost(post, navigate));
     }
   };
 
